@@ -1,0 +1,91 @@
+'''
+working program that allows scaning of a upc code
+working as of >>Monday 5/13/23  9:00AM on Dell Computer
+Modules 'plYAOUND & gTTS installed and working
+For testing I've installed a pantry where items are storied in a csv file  
+'''
+
+import datetime
+import csv
+from playsound import playsound
+from gtts import gTTS
+
+#VOICES
+v1 = "the meijer floor plan installed"
+v2 = "start scaning"
+v3 = "printing shopping list"
+v4 = "start new shopping list"
+v5 = "upc code not reconized"
+v6 = "terminating the iga scaning program"
+
+
+def playaudio(audio):
+    playaudio(audio)
+
+
+
+def convert_to_audio(text):
+    audio = gTTS(text)
+    audio.save("/media/roger/MUSIC/iga/testaudio.mp3")
+    playsound("/media/roger/MUSIC/iga/testaudio.mp3")    
+
+
+
+def open_Pantry(): 
+    with open('/media/roger/MUSIC/iga/Pantry.csv', encoding='utf-8-sig' ) as csvfile:
+        reader = csvfile.read()
+        return(reader)
+
+
+
+def Date_Stamp():
+    now = datetime.datetime.now()
+    current = (now.strftime("%b%d"))
+    return current
+
+
+def look_up():
+    while True:
+        with open("/media/roger/MUSIC/iga/Pantry.csv", encoding='utf-8-sig' ) as csv_file:
+            reader = csv.reader(csv_file)
+            scan = input(str())
+            if scan == "quit":
+                break
+            for row in reader:
+                if row[0] == scan:
+                    print(row[1])
+                    text = row[1]                        
+                    convert_to_audio(text)
+                    playsound
+                    print("done looking")
+                    return text
+                    
+ 
+print ("Start Scaning")
+text = v1
+convert_to_audio(text)
+notes = look_up()
+current = Date_Stamp()
+text = v6
+convert_to_audio(text)
+playsound
+print(current)
+
+
+print(notes)
+list = open("/media/roger/MUSIC/iga/pLIST.csv", "a")
+wr = csv.writer(list)
+#for line in notes:
+wr.writerow(notes)
+print("done")
+list.close()
+
+'''
+Voices:
+v1="the Meijer floor plan installed"
+v2="start scaning"
+v3 ="printing shopping list"
+v4="start new shopping list"
+v5= "upc code not reconized"
+v6= "terminating the IGA scaning program"
+'''
